@@ -1,6 +1,8 @@
 #[print_return_values::print_return_values]
-fn a() {}
+pub fn a(b: String) -> String {
+    b.to_lowercase()
+}
 
 fn main() {
-    a();
+    a(String::from("ABC"));
 }
