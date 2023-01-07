@@ -15,11 +15,12 @@ pub fn print_return_values(attr: TokenStream, item: TokenStream) -> TokenStream 
     let body_block = function.block;
     let signature = function.sig;
     let visibility = function.vis;
+    let function_name = &signature.ident;
     // Attributes (`function.attrs`) are **NOT** covered because donk them
     let result = quote!(
         #visibility #signature {
             let return_value = (move || #body_block)();
-            println!("{:?}", return_value);
+            println!(concat!(stringify!(#function_name), " -> {:?}"), return_value);
             return_value
         }
     );
